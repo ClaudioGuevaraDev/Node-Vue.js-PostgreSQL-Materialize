@@ -1,14 +1,18 @@
 <template>
     <div>
-        <h1 class="title">App con Node y vue</h1>
+        <Navbar/>
+
+        <router-view></router-view>
     </div>
 </template>
 
-<style scoped>
+<script>
+import Navbar from './components/Navbar.vue'
 
-.title {
-    color: red;
-    font-style: italic;
+export default {
+    name: 'App',
+    components: {
+        Navbar
+    }
 }
-
-</style>
+</script>
