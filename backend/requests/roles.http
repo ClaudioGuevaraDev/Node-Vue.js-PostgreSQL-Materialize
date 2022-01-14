@@ -5,7 +5,7 @@ POST {{api}}
 Content-Type: application/json
 
 {
-    "name": "Painter"
+    
 }
 ###
 GET {{api}}

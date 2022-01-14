@@ -1,15 +1,11 @@
 import { pool } from '../database'
 
-export const createRole = async (req, res, next) => {
+export const createRole = async (req, res) => {
     const { name } = req.body
 
-    try {
-        const { rows } = await pool.query('INSERT INTO roles (name) VALUES ($1) RETURNING *', [name])
+    const { rows } = await pool.query('INSERT INTO roles (name) VALUES ($1) RETURNING *', [name])
 
-        res.status(201).json(rows)
-    } catch (error) {
-        next(error)
-    }
+    res.status(201).json(rows)
 }
 
 export const getAllRoles = async (req, res) => {

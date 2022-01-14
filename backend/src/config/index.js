@@ -9,7 +9,9 @@ const config = {
     PG_USER: process.env.PG_USER || 'postgres',
     PG_PORT: process.env.PG_PORT || '5432',
     PG_PASSWORD: process.env.PG_PASSWORD || '',
-    PG_DATABASE: process.env.PG_DATABASE || ''
+    PG_DATABASE: process.env.PG_DATABASE || '',
+
+    TOKEN_SECRET: process.env.TOKEN_SECRET || '123'
 }
 
 export default config

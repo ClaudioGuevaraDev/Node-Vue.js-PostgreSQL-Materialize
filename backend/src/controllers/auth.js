@@ -1,3 +1,7 @@
+import jwt from 'jsonwebtoken'
+
+import config from '../config'
+
 import { pool } from '../database'
 import {
     encryptPassword
@@ -14,7 +18,17 @@ export const signUp = async (req, res) => {
 
     const { rows } = await pool.query('INSERT INTO users (username, email, password, roleId) VALUES ($1, $2, $3, $4) RETURNING *', [username, email, await encryptPassword(password), roleFound.rows[0].id])
 
-    res.status(201).json(rows[0])
+    const userToken = {
+        id: rows[0].id,
+        username: rows[0].username,
+        email: rows[0].email
+    }
+
+    const token = jwt.sign(userToken, config.TOKEN_SECRET, {
+        expiresIn: 86400 // 24 horas
+    })
+
+    res.status(201).json(token)
 }
 
 export const signIn = async (req, res) => {
