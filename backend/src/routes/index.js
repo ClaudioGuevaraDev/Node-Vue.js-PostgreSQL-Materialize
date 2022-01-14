@@ -1,5 +1,9 @@
+import rolesRoutes from './roles'
 import usersRoutes from './users'
+import authRoutes from './auth'
 
 export {
-    usersRoutes
+    rolesRoutes,
+    usersRoutes,
+    authRoutes
 }
