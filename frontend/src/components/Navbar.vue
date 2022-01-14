@@ -16,9 +16,9 @@
                         </a>
                         <ul class="hide-on-med-and-down">
                             <li>
-                                <a class="waves-effect waves-light btn">
+                                <router-link to="/login" class="waves-effect waves-light btn">
                                     Iniciar Sesión
-                                </a>
+                                </router-link>
                             </li>
                             <li>
                                 <a class="waves-effect waves-light btn">
@@ -32,9 +32,9 @@
         </nav>
         <ul class="sidenav" id="mobile">
             <li>
-                <a class="waves-effect waves-light btn">
+                <router-link to="/login" class="waves-effect waves-light btn">
                     Iniciar Sesión
-                </a>
+                </router-link>
             </li>
             <li>
                 <a class="waves-effect waves-light btn">
