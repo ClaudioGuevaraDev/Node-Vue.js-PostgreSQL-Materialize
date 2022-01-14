@@ -2,5 +2,10 @@
 
 ###
 POST {{api}}/sign-up
+Content-Type: application/json
+
+{
+    "email": "hola@gmail.com"
+}
 ###
 POST {{api}}/sign-in

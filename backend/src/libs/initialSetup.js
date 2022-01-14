@@ -1,7 +1,7 @@
 import { pool } from '../database'
 
 export const createRoles = async () => {
-    const { rowCount } = await pool.query('SELECT * FROM users')
+    const { rowCount } = await pool.query('SELECT * FROM roles')
 
     if (rowCount > 0) return
 
