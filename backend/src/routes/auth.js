@@ -9,6 +9,7 @@ router.post('/sign-up', [
     middlewares.verifyUsername,
     middlewares.verifyEmail
 ], authCtrl.signUp)
+router.get('/confirm-account/:id/:token', authCtrl.confirmAccount)
 router.post('/sign-in', authCtrl.signIn)
 
 export default router

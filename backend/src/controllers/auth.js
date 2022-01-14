@@ -31,11 +31,28 @@ export const signUp = async (req, res) => {
         expiresIn: 86400 // 24 horas
     })
 
-    await sendEmail(rows[0].email)
+    await sendEmail(rows[0].email, rows[0].id, token)
 
-    res.status(201).json(token)
+    res.status(201).json({ message: 'Cuenta registrada. Te enviamos un correo para que verifiques tu cuenta.' })
+}
+
+export const confirmAccount = async (req, res) => {
+    const userId = req.params.id
+    const token = req.params.token
+
+    jwt.verify(token, config.TOKEN_SECRET)
+
+    const { rowCount } = await pool.query('SELECT * FROM users WHERE id = $1', [userId])
+
+    if (rowCount === 0) return res.status(404).json({ message: 'Usuario no encontrado.' })
+
+    await pool.query('UPDATE users SET verified = $1 WHERE id = $2', [true, userId])
+
+    res.send('<p>Cuenta confirmada. Ya puedes iniciar sesión.</p>')
 }
 
 export const signIn = async (req, res) => {
-    res.send('sign in')
+
+
+    res.send('vas bien')
 }
