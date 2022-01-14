@@ -5,8 +5,8 @@ POST {{api}}/sign-up
 Content-Type: application/json
 
 {
-    "username": "user4@gmail.com",
-    "email": "hola4@gmail.com",
+    "username": "ChichaDios",
+    "email": "chichadioss23@gmail.com",
     "password": "claudio123"
 }
 ###

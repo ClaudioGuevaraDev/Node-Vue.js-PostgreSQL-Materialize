@@ -4,8 +4,11 @@ import config from '../config'
 
 import { pool } from '../database'
 import {
-    encryptPassword
+    encryptPassword,
 } from '../libs/handlePassword'
+import {
+    sendEmail
+} from '../libs/sendEmail'
 
 export const signUp = async (req, res) => {
     const { username, email, password } = req.body
@@ -27,6 +30,8 @@ export const signUp = async (req, res) => {
     const token = jwt.sign(userToken, config.TOKEN_SECRET, {
         expiresIn: 86400 // 24 horas
     })
+
+    await sendEmail(rows[0].email)
 
     res.status(201).json(token)
 }
