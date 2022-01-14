@@ -21,9 +21,9 @@
                                 </router-link>
                             </li>
                             <li>
-                                <a class="waves-effect waves-light btn">
+                                <router-link to="/register" class="waves-effect waves-light btn">
                                     Registrarase
-                                </a>
+                                </router-link>
                             </li>
                         </ul>
                     </div>
@@ -37,9 +37,9 @@
                 </router-link>
             </li>
             <li>
-                <a class="waves-effect waves-light btn">
+                <router-link to="/register" class="waves-effect waves-light btn">
                     Registrarase
-                </a>
+                </router-link>
             </li>
         </ul>
     </div>
