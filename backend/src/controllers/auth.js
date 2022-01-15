@@ -5,6 +5,7 @@ import config from '../config'
 import { pool } from '../database'
 import {
     encryptPassword,
+    comparePassword
 } from '../libs/handlePassword'
 import {
     sendEmail
@@ -54,7 +55,25 @@ export const confirmAccount = async (req, res) => {
 }
 
 export const signIn = async (req, res) => {
+    const { email, password } = req.body
 
+    const { rows, rowCount } = await pool.query('SELECT U.id, U.username, U.email, U.password, U.verified, R.name AS role FROM users as U JOIN roles as R ON R.id = U.roleId WHERE email = $1', [email])
 
-    res.send('vas bien')
+    if (rowCount === 0) return res.status(401).json({ message: 'Error al iniciar sesión.' })
+
+    if (await comparePassword(password, rows[0].password) === false) return res.status(401).json({ message: 'Error al iniciar la sesión.' })
+
+    if (rows[0].verified === false) return res.status(401).json({ message: 'Debes confirmar tu cuenta.' })
+
+    const userToken = {
+        id: rows[0].id,
+        username: rows[0].id,
+        role: rows[0].role
+    }
+
+    const token = jwt.sign(userToken, config.TOKEN_SECRET, {
+        expiresIn: 86400 // 24 horas
+    })
+
+    res.json({ token })
 }

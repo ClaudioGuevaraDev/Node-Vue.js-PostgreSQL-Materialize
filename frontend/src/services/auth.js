@@ -7,3 +7,9 @@ export const signUp = async (user) => {
 
     return res.data.message
 }
+
+export const signIn = async (user) => {
+    const { data } = await axios.post(`${baseURL}/sign-in`, user)
+
+    return data
+}
