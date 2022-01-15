@@ -42,11 +42,19 @@
                             >
                             <label for="repeat-password">Repetir Contraseña</label>
                         </div>
-                        <div class="buttons">
+                        <div v-if="loading">
+                            <div class="progress">
+                                <div class="indeterminate"></div>
+                            </div>
+                        </div>
+                        <div v-else class="buttons">
                             <button class="waves-effect waves-light btn">
                                 Registro
                             </button>
-                            <button class="btn-cancelar waves-effect waves-light btn red darken-1">
+                            <button 
+                                @click="handleCancel"
+                                class="btn-cancelar waves-effect waves-light btn red darken-1"
+                            >
                                 Cancelar
                             </button>
                         </div>
@@ -58,6 +66,8 @@
 </template>
 
 <script>
+import { signUp } from '../services/auth'
+
 export default {
     data() {
         return {
@@ -66,12 +76,40 @@ export default {
                 email: '',
                 password: '',
                 repetedPassword: ''
-            }
+            },
+            loading: false
         }
     },
     methods: {
         async handleSubmit() {
-            console.log(this.user)
+            this.loading = true
+            try {
+                const res = await signUp(this.user)
+                this.$toast.open({
+                    type: 'success',
+                    duration: 5000,
+                    position: 'top',
+                    message: res
+                })
+                this.$router.push('/login')
+            } catch (error) {
+                this.$toast.open({
+                    type: 'error',
+                    duration: 5000,
+                    position: 'top',
+                    message: error.response.data.message
+                })
+                this.handleCancel()
+                this.loading = false
+            }
+        },
+        handleCancel() {
+            this.user = {
+                username: '',
+                email: '',
+                password: '',
+                repetedPassword: ''
+            }
         }
     }
 }

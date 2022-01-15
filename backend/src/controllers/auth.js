@@ -11,9 +11,11 @@ import {
 } from '../libs/sendEmail'
 
 export const signUp = async (req, res) => {
-    const { username, email, password } = req.body
+    const { username, email, password, repetedPassword } = req.body
 
-    if (!password) return res.status(400).json({ message: 'Falta la contraseña.' })
+    if (!password || !repetedPassword) return res.status(400).json({ message: 'Falta la contraseña.' })
+
+    if (password !== repetedPassword) return res.status(400).json({ message: 'Las contraseñas no son iguales.' })
 
     if (password.length < 8) return res.status(400).json({ message: 'La contraseña debe tener un largo mínimo de 8 caracteres.' })
 
