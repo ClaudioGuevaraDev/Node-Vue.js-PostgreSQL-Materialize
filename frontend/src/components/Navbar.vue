@@ -23,7 +23,7 @@
                                     <router-link to="/">Mis Reseñas</router-link>
                                 </li>
                                 <li>
-                                    <a @click="$store.dispatch('actionLogout')" class="waves-effect waves-light btn red darken-1">
+                                    <a href="#modal-logout" class="waves-effect waves-light btn red darken-1 modal-trigger">
                                         Cerrar Sesión <i class="material-icons right">exit_to_app</i>
                                     </a>
                                 </li>
@@ -54,7 +54,7 @@
                     <router-link to="/">Mis Reseñas</router-link>
                 </li>
                 <li>
-                    <a @click="$store.dispatch('actionLogout')"  class="waves-effect waves-light btn red darken-1">
+                    <a href="#modal-logout" class="waves-effect waves-light btn red darken-1 modal-trigger">
                         Cerrar Sesión
                     </a>
                 </li>
@@ -72,6 +72,16 @@
                 </li>
             </div>
         </ul>
+        <div class="modal" id="modal-logout">
+            <div class="modal-content">
+                <h5>Cerrar Sesión</h5>
+                <p>¿Estas seguro de cerrar tu sesión?</p>
+            </div>
+            <div class="modal-footer">
+                <a @click="$store.dispatch('actionLogout')" class="modal-close waves-effect waves-green btn-flat">Confirmar</a>
+                <a class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -88,6 +98,10 @@ export default {
 
 .title {
     margin-left: 1rem;
+}
+
+.btn-cancelar {
+    margin-left: 1.5rem;
 }
 
 </style>
