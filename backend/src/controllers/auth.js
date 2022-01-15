@@ -67,7 +67,7 @@ export const signIn = async (req, res) => {
 
     const userToken = {
         id: rows[0].id,
-        username: rows[0].id,
+        username: rows[0].username,
         role: rows[0].role
     }
 

@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import jwt_decode from 'jwt-decode'
+
 import { signIn } from '../services/auth'
 
 export default {
@@ -63,7 +65,15 @@ export default {
             try {
                 const { token } = await signIn(this.user)
 
+                const { username, role } = jwt_decode(token)
+
                 window.localStorage.setItem('token', token)
+                this.$store.state.logged = true
+                this.$store.state.token = token
+                this.$store.state.username = username
+                this.$store.state.role = role
+
+                this.$router.push('/')
             } catch (error) {
                 this.$toast.open({
                     type: 'error',
@@ -81,6 +91,9 @@ export default {
                 password: ''
             }
         }
+    },
+    mounted() {
+        if (this.$store.state.logged) this.$router.push('/')
     }
 }
 </script>

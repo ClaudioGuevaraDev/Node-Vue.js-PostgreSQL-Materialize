@@ -15,32 +15,62 @@
                             <i class="material-icons">menu</i>
                         </a>
                         <ul class="hide-on-med-and-down">
-                            <li>
-                                <router-link to="/login" class="waves-effect waves-light btn">
-                                    Iniciar Sesión
-                                </router-link>
-                            </li>
-                            <li>
-                                <router-link to="/register" class="waves-effect waves-light btn">
-                                    Registrarase
-                                </router-link>
-                            </li>
+                            <div v-if="$store.state.logged">
+                                <li>
+                                    <router-link to="/">{{ $store.state.username }}</router-link>
+                                </li>
+                                <li class="active">
+                                    <router-link to="/">Mis Reseñas</router-link>
+                                </li>
+                                <li>
+                                    <a @click="$store.dispatch('actionLogout')" class="waves-effect waves-light btn red darken-1">
+                                        Cerrar Sesión <i class="material-icons right">exit_to_app</i>
+                                    </a>
+                                </li>
+                            </div>
+                            <div v-else>
+                                <li>
+                                    <router-link to="/login" class="waves-effect waves-light btn">
+                                        Iniciar Sesión
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/register" class="waves-effect waves-light btn">
+                                        Registrarase
+                                    </router-link>
+                                </li>
+                            </div>
                         </ul>
                     </div>
                 </div>
             </div>
         </nav>
         <ul class="sidenav" id="mobile">
-            <li>
-                <router-link to="/login" class="waves-effect waves-light btn">
-                    Iniciar Sesión
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/register" class="waves-effect waves-light btn">
-                    Registrarase
-                </router-link>
-            </li>
+            <div v-if="$store.state.logged">
+                <li>
+                    <router-link to="/">{{ $store.state.username }}</router-link>
+                </li>
+                <li class="active">
+                    <router-link to="/">Mis Reseñas</router-link>
+                </li>
+                <li>
+                    <a @click="$store.dispatch('actionLogout')"  class="waves-effect waves-light btn red darken-1">
+                        Cerrar Sesión
+                    </a>
+                </li>
+            </div>
+            <div v-else>
+                <li>
+                    <router-link to="/login" class="waves-effect waves-light btn">
+                        Iniciar Sesión
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/register" class="waves-effect waves-light btn">
+                        Registrarase
+                    </router-link>
+                </li>
+            </div>
         </ul>
     </div>
 </template>

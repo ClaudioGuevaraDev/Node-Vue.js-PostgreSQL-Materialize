@@ -19,6 +19,7 @@ export default {
         Navbar
     },
     mounted() {
+        this.$store.dispatch('actionVerificationSession')
         M.AutoInit();
     }
 }

@@ -111,6 +111,9 @@ export default {
                 repetedPassword: ''
             }
         }
+    },
+    mounted() {
+        if (this.$store.state.logged) this.$router.push('/')
     }
 }
 </script>
