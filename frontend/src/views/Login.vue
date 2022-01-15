@@ -65,11 +65,12 @@ export default {
             try {
                 const { token } = await signIn(this.user)
 
-                const { username, role } = jwt_decode(token)
+                const { id, username, role } = jwt_decode(token)
 
                 window.localStorage.setItem('token', token)
                 this.$store.state.logged = true
                 this.$store.state.token = token
+                this.$store.state.userId = id
                 this.$store.state.username = username
                 this.$store.state.role = role
 

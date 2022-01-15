@@ -20,3 +20,33 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+}
+</script>
+
+<style scoped>
+
+.title {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.author {
+    font-weight: normal;
+    font-size: 1rem;
+    font-style: italic;
+}
+
+.description {
+    text-align: justify;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+</style>

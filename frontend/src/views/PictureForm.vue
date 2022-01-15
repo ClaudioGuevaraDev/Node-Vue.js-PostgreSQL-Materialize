@@ -9,28 +9,23 @@
                             <input 
                                 type="text" 
                                 id="title"
+                                required
+                                v-model="picture.title"
                             >
                             <label for="title">Título</label>
                         </div>
                         <div class="input-field">
-                            <input 
-                                type="text" 
-                                id="author"
-                            >
-                            <label for="author">Autor</label>
-                        </div>
-                        <div class="input-field">
-                            <textarea id="description" class="materialize-textarea" rows="3"></textarea>
+                            <textarea required v-model="picture.description" id="description" class="materialize-textarea" rows="3"></textarea>
                             <label for="description">Descripción</label>
                         </div>
                         <div class="input-field">
                             <div class="file-field input-field">
                                 <div class="btn">
                                     <span><i class="material-icons">cloud_upload</i></span>
-                                    <input type="file" multiple>
+                                    <input required @change="handleFile" type="file" multiple>
                                 </div>
                                 <div class="file-path-wrapper">
-                                    <input class="file-path validate" type="text" placeholder="Subir un archivo...">
+                                    <input id="file-input" class="file-path validate" type="text" placeholder="Subir un archivo...">
                                 </div>
                             </div>
                         </div>
@@ -57,10 +52,67 @@
 </template>
 
 <script>
+import { 
+    createPicture,
+    uploadImage
+} from '../services/pictures'
+
 export default {
     data() {
         return {
-            loading: false
+            loading: false,
+            picture: {
+                title: '',
+                description: '',
+                file: null
+            }
+        }
+    },
+    methods: {
+        async handleSubmit() {
+            this.loading = true
+            try {
+                const data = {
+                    title: this.picture.title,
+                    description: this.picture.description,
+                    userId: this.$store.state.userId
+                }
+                const res = await createPicture(data)
+
+                const pictureId = res.id
+
+                if (res && this.picture.file !== null) {
+                    const formData = new FormData()
+
+                    formData.append('image', this.picture.file)
+
+                    await uploadImage(formData, pictureId)
+
+                    this.$toast.open({
+                        type: 'success',
+                        duration: 5000,
+                        position: 'top',
+                        message: 'Imagen subida con éxito.'
+                    })
+                }
+            } catch (error) {
+                this.$toast.open({
+                    type: 'error',
+                    duration: 5000,
+                    message: error.response.data.message,
+                    position: 'top'
+                })
+            }
+            this.picture = {
+                title: '',
+                description: '',
+                file: null
+            }
+            document.getElementById('file-input').value = null
+            this.loading = false
+        },
+        handleFile(e) {
+            this.picture.file = e.target.files[0]
         }
     }
 }

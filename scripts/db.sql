@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS pictures (
     id SERIAL PRIMARY KEY,
     title VARCHAR(100) NOT NULL UNIQUE,
     description TEXT NOT NULL,
-    image VARCHAR(250) NOT NULL,
+    image VARCHAR(250),
     userId INTEGER REFERENCES users (id)
         ON DELETE CASCADE ON UPDATE CASCADE
 );

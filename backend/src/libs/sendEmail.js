@@ -3,8 +3,8 @@ import { createTransport } from 'nodemailer'
 import config from '../config'
 
 export const sendEmail = async (email, id, token) => {
-    const user = config.NODEMAILER_USER
-    const pass = config.NODEMAILER_PASSWORD
+    let user = config.NODEMAILER_USER
+    let pass = config.NODEMAILER_PASSWORD
 
     const transporter = createTransport({
         host: 'smtp.ethereal.email',

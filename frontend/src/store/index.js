@@ -6,6 +6,7 @@ const store = createStore({
     state: {
         logged: false,
         token: '',
+        userId: 0,
         username: '',
         role: ''
     },
@@ -14,10 +15,11 @@ const store = createStore({
             const token = window.localStorage.getItem('token')
 
             if (token) {
-                const { username, role } = jwt_decode(token)
+                const { id, username, role } = jwt_decode(token)
 
                 state.token = token
                 state.logged = true
+                state.userId = id
                 state.username = username
                 state.role = role
             }
