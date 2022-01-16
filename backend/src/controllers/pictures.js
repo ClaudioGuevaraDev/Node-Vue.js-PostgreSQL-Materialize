@@ -56,3 +56,15 @@ export const updatePicture = async (req, res) => {
 
     res.json(rows[0])
 }
+
+export const updatePictureImage = async (req, res) => {
+    const pictureFound = await pool.query('SELECT * FROM pictures WHERE id = $1', [req.params.id])
+
+    const imageUrl = path.join(__dirname, `../public/images/${pictureFound.rows[0].image}`)
+
+    fs.unlinkSync(imageUrl)
+
+    const { rows } = await pool.query('UPDATE pictures SET image = $1 WHERE id = $2 RETURNING * ', [req.file.filename, req.params.id])
+
+    res.json(rows[0])
+}

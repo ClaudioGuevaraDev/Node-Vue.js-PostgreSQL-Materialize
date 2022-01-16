@@ -31,3 +31,15 @@ export const getOnePicture = async (pictureId) => {
 
     return data
 }
+
+export const updatePicture = async (pictureId, picture) => {
+    const { data } = await axios.put(`${baseURL}/${pictureId}`, picture)
+
+    return data
+}
+
+export const updatePictureImage = async (pictureId, formData) => {
+    const { data } = await axios.put(`${baseURL}/update-image/${pictureId}`, formData)
+
+    return data
+}

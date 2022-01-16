@@ -16,4 +16,9 @@ router.get('/filtered/:id', picturesCtrl.getFilteredPictures)
 
 router.delete('/:id', picturesCtrl.deletePicture)
 
+router.put('/:id', picturesCtrl.updatePicture)
+router.put('/update-image/:id', [
+    middlewares.fileUpload
+], picturesCtrl.updatePictureImage)
+
 export default router

@@ -22,10 +22,10 @@
                             <div class="file-field input-field">
                                 <div class="btn">
                                     <span><i class="material-icons">cloud_upload</i></span>
-                                    <input required @change="handleFile" type="file" multiple>
+                                    <input id="file-input" required @change="handleFile" type="file" multiple>
                                 </div>
                                 <div class="file-path-wrapper">
-                                    <input id="file-input" class="file-path validate" type="text" placeholder="Subir un archivo...">
+                                    <input class="file-path validate" type="text" placeholder="Subir un archivo...">
                                 </div>
                             </div>
                         </div>
