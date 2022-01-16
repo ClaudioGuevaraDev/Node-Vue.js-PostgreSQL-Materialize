@@ -2,7 +2,7 @@
     <div class="col l4">
         <div class="card large">
             <div class="card-image">
-                <img src="https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340" alt=""> 
+                <img :src="getImageUrl(picture.image)" alt=""> 
             </div>
             <div class="card-content">
                 <span class="card-title title">{{ picture.title }} <span class="author">({{ picture.username }})</span></span>
@@ -27,6 +27,11 @@ export default {
         picture: {
             type: Object,
             required: true
+        }
+    },
+    methods: {
+        getImageUrl(image) {
+            return `/${image}`
         }
     }
 }

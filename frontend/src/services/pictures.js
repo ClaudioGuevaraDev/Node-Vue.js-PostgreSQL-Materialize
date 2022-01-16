@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = 'http://localhost:4000/api/pictures'
+const baseURL = '/api/pictures'
 
 export const createPicture = async (picture) => {
     const { data } = await axios.post(baseURL, picture)
