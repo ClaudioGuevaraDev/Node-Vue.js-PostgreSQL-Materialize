@@ -30,7 +30,7 @@ export const getOnePictures = async (req, res) => {
 }
 
 export const getFilteredPictures = async (req, res) => {
-    const { rows } = await pool.query('SELECT * FROM pictures WHERE userId = $1', [req.params.id])
+    const { rows } = await pool.query('SELECT P.id, P.title, P.description, P.image, U.username FROM pictures AS P JOIN users AS U ON U.id = P.userId WHERE P.userId = $1', [req.params.id])
 
     res.json(rows)
 }

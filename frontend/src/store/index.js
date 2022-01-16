@@ -30,12 +30,15 @@ const store = createStore({
                 state.role = role
             }
         },
-        mutationLogout(state) {
+        async mutationLogout(state) {
             window.localStorage.removeItem('token')
             state.logged = false
             state.token = ''
             state.username = ''
             state.role = ''
+
+            const res = await getAllPictures()
+            state.pictures = res
         },
         async mutationGetPictures(state) {
             if (state.role === 'User' || state.role === '') {
