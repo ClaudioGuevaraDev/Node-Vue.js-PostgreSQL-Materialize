@@ -24,7 +24,7 @@
                         <p>¿Estas seguro de eliminar la pintura '{{ picture.title }}'?</p>
                     </div>
                     <div class="modal-footer">
-                        <a @click="$store.dispatch('actionDeletePicture', picture.id)" class="modal-close waves-effect waves-green btn-flat">Confirmar</a>
+                        <a @click="handleDeletePicture(picture.id)" class="modal-close waves-effect waves-green btn-flat">Confirmar</a>
                         <a class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
                     </div>
                 </div>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { deletePicture } from '../services/pictures'
 
 export default {
     props: {
@@ -48,6 +49,25 @@ export default {
         },
         updatePicture(pictureId) {
             return `/update-picture${pictureId}`
+        },
+        async handleDeletePicture(pictureId) {
+            try {
+                const res = await deletePicture(pictureId, this.$store.state.token)
+                this.$store.state.pictures = this.$store.state.pictures.filter(picture => picture.id !== res.id)
+                this.$toast.open({
+                    type: 'success',
+                    duration: 5000,
+                    position: 'top',
+                    message: 'Pintura eliminada con éxito.'
+                })
+            } catch (error) {
+                this.$toast.open({
+                    type: 'error',
+                    duration: 5000,
+                    position: 'top',
+                    message: error.response.data.message
+                })
+            }
         }
     },
     mounted() {

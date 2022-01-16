@@ -24,7 +24,7 @@
                                     <input id="file-input" @change="handleFile" type="file" multiple>
                                 </div>
                                 <div class="file-path-wrapper">
-                                    <input class="file-path validate" type="text" placeholder="Subir un archivo...">
+                                    <input id="file-input-text" class="file-path validate" type="text" placeholder="Subir un archivo...">
                                 </div>
                             </div>
                         </div>
@@ -67,9 +67,18 @@ export default {
     },
     methods: {
         async getPicture() {
-            const res = await getOnePicture(this.$route.params.id)
-            this.picture.title = res.title
-            this.picture.description = res.description
+            try {
+                const res = await getOnePicture(this.$route.params.id, this.$store.state.token)
+                this.picture.title = res.title
+                this.picture.description = res.description
+            } catch (error) {
+                this.$toast.open({
+                    type: 'error',
+                    duration: 5000,
+                    position: 'top',
+                    message: error.response.data.message
+                })
+            }
         },
         async handleSubmit() {
             this.loading = true
@@ -78,7 +87,7 @@ export default {
                     title: this.picture.title,
                     description: this.picture.description
                 }
-                const res = await updatePicture(this.$route.params.id, data)
+                const res = await updatePicture(this.$route.params.id, data, this.$store.state.token)
 
                 if (res.id) {
                     if (this.picture.file === null) {
@@ -91,7 +100,7 @@ export default {
                     } else {
                         const formData = new FormData()
                         formData.append('image', this.picture.file)
-                        await updatePictureImage(this.$route.params.id, formData)
+                        await updatePictureImage(this.$route.params.id, formData, this.$store.state.token)
                         this.$toast.open({
                             type: 'success',
                             duration: 5000,
@@ -121,6 +130,7 @@ export default {
                 description: ''
             }
             document.getElementById('file-input').value = null
+            document.getElementById('file-input-text').value = null
         }
     },
     mounted() {

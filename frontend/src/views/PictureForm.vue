@@ -25,7 +25,7 @@
                                     <input id="file-input" required @change="handleFile" type="file" multiple>
                                 </div>
                                 <div class="file-path-wrapper">
-                                    <input class="file-path validate" type="text" placeholder="Subir un archivo...">
+                                    <input id="file-input-text" class="file-path validate" type="text" placeholder="Subir un archivo...">
                                 </div>
                             </div>
                         </div>
@@ -35,10 +35,12 @@
                             </div>
                         </div>
                         <div v-else class="buttons">
-                            <button class="waves-effect waves-light btn">
+                            <button type="submit" class="waves-effect waves-light btn">
                                 Crear
                             </button>
                             <button 
+                                type="button"
+                                @click="handleCancel"
                                 class="btn-cancelar waves-effect waves-light btn red darken-1"
                             >
                                 Cancelar
@@ -77,7 +79,7 @@ export default {
                     description: this.picture.description,
                     userId: this.$store.state.userId
                 }
-                const res = await createPicture(data)
+                const res = await createPicture(data, this.$store.state.token)
 
                 const pictureId = res.id
 
@@ -86,7 +88,7 @@ export default {
 
                     formData.append('image', this.picture.file)
 
-                    await uploadImage(formData, pictureId)
+                    await uploadImage(formData, pictureId, this.$store.state.token)
 
                     this.$toast.open({
                         type: 'success',
@@ -103,16 +105,20 @@ export default {
                     position: 'top'
                 })
             }
+            this.handleCancel()
+            this.loading = false
+        },
+        handleFile(e) {
+            this.picture.file = e.target.files[0]
+        },
+        handleCancel() {
             this.picture = {
                 title: '',
                 description: '',
                 file: null
             }
             document.getElementById('file-input').value = null
-            this.loading = false
-        },
-        handleFile(e) {
-            this.picture.file = e.target.files[0]
+            document.getElementById('file-input-text').value = null
         }
     }
 }

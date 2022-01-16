@@ -9,7 +9,8 @@ import path from 'path'
 import config from './config'
 
 import {  
-    createRoles
+    createRoles,
+    createPainterUsers
 } from './libs/initialSetup'
 import {
     createPublicDirectory,
@@ -21,10 +22,11 @@ import * as routes from './routes'
 
 const app = express()
 
-createRoles()
-
 createPublicDirectory()
 createImagesDirectory()
+
+createRoles()
+createPainterUsers()
 
 app.set('port', config.APP_PORT)
 

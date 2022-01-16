@@ -4,7 +4,7 @@ import { createStore } from 'vuex'
 
 import {
     getAllPictures,
-    deletePicture
+    getFilteredPictures
 } from '../services/pictures'
 
 const store = createStore({
@@ -38,14 +38,13 @@ const store = createStore({
             state.role = ''
         },
         async mutationGetPictures(state) {
-            if (state.role === 'User') {
+            if (state.role === 'User' || state.role === '') {
                 const res = await getAllPictures()
                 state.pictures = res
-            }
-        },
-        async mutationDeletePicture(state, pictureId) {
-            const res = await deletePicture(pictureId)
-            state.pictures = state.pictures.filter(picture => picture.id !== res.id)
+            } else if (state.role === 'Painter') {
+                const res = await getFilteredPictures(state.userId, state.token)
+                state.pictures = res
+            }   
         }
     },
     actions: {
@@ -57,9 +56,6 @@ const store = createStore({
         },
         actionGetPictures(context) {
             context.commit('mutationGetPictures')
-        },
-        actionDeletePicture(context, pictureId) {
-            context.commit('mutationDeletePicture', pictureId)
         }
     }
 })
