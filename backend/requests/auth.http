@@ -11,3 +11,9 @@ Content-Type: application/json
 }
 ###
 POST {{api}}/sign-in
+Content-Type: application/json
+
+{
+    "email": "claudio.guevara.dev@gmail.com",
+    "password": ""
+}

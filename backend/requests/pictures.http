@@ -1,0 +1,11 @@
+@api = http://localhost:4000/api/pictures
+
+###
+GET {{api}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJDaGljaGFEaW9zIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE2NDIzNTQyNTcsImV4cCI6MTY0MjQ0MDY1N30.jMzuLaeqQ8CrI-20bq5GZaW5Kt9utu2JHXpOSmaiNjw
+###
+POST {{api}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJDaGljaGFEaW9zIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE2NDIzNTQyNTcsImV4cCI6MTY0MjQ0MDY1N30.jMzuLaeqQ8CrI-20bq5GZaW5Kt9utu2JHXpOSmaiNjw
+###
+DELETE {{api}}/37
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJDaGljaGFEaW9zIiwicm9sZSI6IlVzZXIiLCJpYXQiOjE2NDIzNTQyNTcsImV4cCI6MTY0MjQ0MDY1N30.jMzuLaeqQ8CrI-20bq5GZaW5Kt9utu2JHXpOSmaiNjw
