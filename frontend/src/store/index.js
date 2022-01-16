@@ -3,7 +3,8 @@ import jwt_decode from 'jwt-decode'
 import { createStore } from 'vuex'
 
 import {
-    getAllPictures
+    getAllPictures,
+    deletePicture
 } from '../services/pictures'
 
 const store = createStore({
@@ -41,7 +42,11 @@ const store = createStore({
                 const res = await getAllPictures()
                 state.pictures = res
             }
-        } 
+        },
+        async mutationDeletePicture(state, pictureId) {
+            const res = await deletePicture(pictureId)
+            state.pictures = state.pictures.filter(picture => picture.id !== res.id)
+        }
     },
     actions: {
         actionVerificationSession(context) {
@@ -52,6 +57,9 @@ const store = createStore({
         },
         actionGetPictures(context) {
             context.commit('mutationGetPictures')
+        },
+        actionDeletePicture(context, pictureId) {
+            context.commit('mutationDeletePicture', pictureId)
         }
     }
 })

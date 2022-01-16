@@ -13,4 +13,6 @@ router.post('/upload-image/:id', [
 router.get('/', picturesCtrl.getAllPictures)
 router.get('/filtered', picturesCtrl.getFilteredPictures)
 
+router.delete('/:id', picturesCtrl.deletePicture)
+
 export default router

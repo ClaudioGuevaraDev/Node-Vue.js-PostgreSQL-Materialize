@@ -25,3 +25,11 @@ export const getFilteredPictures = async (req, res) => {
 
     res.json(rows)
 }
+
+export const deletePicture = async (req, res) => {
+    const { rows, rowCount } = await pool.query('DELETE FROM pictures WHERE id = $1 RETURNING *', [req.params.id])
+
+    if (rowCount === 0) return res.status(404).json({ message: 'No se encontró la pintura.' })
+
+    res.json(rows[0])
+}
