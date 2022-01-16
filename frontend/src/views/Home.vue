@@ -8,9 +8,9 @@
             </div>
         </div>
         <div class="row">
-            <picture-card></picture-card>
-            <picture-card></picture-card>
-            <picture-card></picture-card>
+            <div v-for="picture in $store.state.pictures" :key="picture.id">
+                <picture-card :picture="picture"></picture-card>
+            </div>
         </div>
     </div>
 </template>
@@ -24,7 +24,7 @@ export default {
         PictureCard
     },
     mounted() {
-        
+        this.$store.dispatch('actionGetPictures')
     }
 }
 </script>

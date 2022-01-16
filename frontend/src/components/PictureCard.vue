@@ -2,12 +2,12 @@
     <div class="col l4">
         <div class="card large">
             <div class="card-image">
-                <img src="https://www.closetag.com/images/photo4.jpg" alt=""> 
+                <img src="https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340" alt=""> 
             </div>
             <div class="card-content">
-                <span class="card-title title">El nacimiento de Venus <span class="author">(Sandro Botticelli)</span></span>
+                <span class="card-title title">{{ picture.title }} <span class="author">({{ picture.username }})</span></span>
                 <p class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores consectetur iure minus, est voluptate impedit aut inventore dolorem dicta excepturi asd a.
+                    {{ picture.description }}
                 </p>
             </div>
             <div class="card-action">
@@ -23,6 +23,12 @@
 
 <script>
 export default {
+    props: {
+        picture: {
+            type: Object,
+            required: true
+        }
+    }
 }
 </script>
 

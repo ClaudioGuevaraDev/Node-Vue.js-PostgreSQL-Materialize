@@ -13,3 +13,15 @@ export const uploadImage = async (req, res) => {
 
     res.json(rows[0])
 }
+
+export const getAllPictures = async (req, res) => {
+    const { rows } = await pool.query('SELECT P.id, P.title, P.description, P.image, U.username FROM pictures as P JOIN users as U ON U.id = P.userId')
+
+    res.json(rows)
+}
+
+export const getFilteredPictures = async (req, res) => {
+    const { rows } = await pool.query('SELECT * FROM pictures WHERE userId = $1', [req.params.id])
+
+    res.json(rows)
+}

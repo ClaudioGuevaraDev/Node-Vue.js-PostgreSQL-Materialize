@@ -13,3 +13,9 @@ export const uploadImage = async (formData, pictureId) => {
 
     return data
 }
+
+export const getAllPictures = async () => {
+    const { data } = await axios.get(baseURL)
+
+    return data
+}

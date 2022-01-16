@@ -2,13 +2,18 @@ import jwt_decode from 'jwt-decode'
 
 import { createStore } from 'vuex'
 
+import {
+    getAllPictures
+} from '../services/pictures'
+
 const store = createStore({
     state: {
         logged: false,
         token: '',
         userId: 0,
         username: '',
-        role: ''
+        role: '',
+        pictures: []
     },
     mutations: {
         mutationVerificationSession(state) {
@@ -30,6 +35,12 @@ const store = createStore({
             state.token = ''
             state.username = ''
             state.role = ''
+        },
+        async mutationGetPictures(state) {
+            if (state.role === 'User') {
+                const res = await getAllPictures()
+                state.pictures = res
+            }
         } 
     },
     actions: {
@@ -38,6 +49,9 @@ const store = createStore({
         },
         actionLogout(context) {
             context.commit('mutationLogout')
+        },
+        actionGetPictures(context) {
+            context.commit('mutationGetPictures')
         }
     }
 })

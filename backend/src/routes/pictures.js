@@ -10,4 +10,7 @@ router.post('/upload-image/:id', [
     middlewares.fileUpload
 ], picturesCtrl.uploadImage)
 
+router.get('/', picturesCtrl.getAllPictures)
+router.get('/filtered', picturesCtrl.getFilteredPictures)
+
 export default router
