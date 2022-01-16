@@ -25,3 +25,9 @@ export const getAllPictures = async () => {
 
     return data
 }
+
+export const getOnePicture = async (pictureId) => {
+    const { data } = await axios.get(`${baseURL}/${pictureId}`)
+
+    return data
+}

@@ -11,7 +11,8 @@ router.post('/upload-image/:id', [
 ], picturesCtrl.uploadImage)
 
 router.get('/', picturesCtrl.getAllPictures)
-router.get('/filtered', picturesCtrl.getFilteredPictures)
+router.get('/:id', picturesCtrl.getOnePictures)
+router.get('/filtered/:id', picturesCtrl.getFilteredPictures)
 
 router.delete('/:id', picturesCtrl.deletePicture)
 

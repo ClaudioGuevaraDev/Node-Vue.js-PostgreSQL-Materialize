@@ -3,7 +3,7 @@
         <div class="col l4">
             <div class="card large">
                 <div class="card-image">
-                    <img :src="getImageUrl(picture.image)" alt=""> 
+                    <img :src="getImageUrl(picture.image)" alt=""/>
                 </div>
                 <div class="card-content">
                     <span class="card-title title">{{ picture.title }} <span class="author">({{ picture.username }})</span></span>
@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-action">
                     <div class="buttons">
-                        <a class="waves-effect waves-light btn yellow darken-1"><i class="material-icons">edit</i></a>
+                        <router-link :to="{ name: 'update-picture', params: { id: picture.id }}" class="waves-effect waves-light btn yellow darken-1"><i class="material-icons">edit</i></router-link>
                         <a href="#modal-delete" class="waves-effect waves-light btn red darken-1 modal-trigger"><i class="material-icons">delete</i></a>
                         <a class="waves-effect waves-light btn light-blue darken-1"><i class="material-icons">insert_comment</i></a>
                     </div>
@@ -44,10 +44,10 @@ export default {
     },
     methods: {
         getImageUrl(image) {
-            return `/${image}`
+            return `/images/${image}`
         },
-        async handleDelete() {
-            console.log('hola')
+        updatePicture(pictureId) {
+            return `/update-picture${pictureId}`
         }
     },
     mounted() {

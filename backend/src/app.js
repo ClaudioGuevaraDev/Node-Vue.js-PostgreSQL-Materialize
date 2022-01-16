@@ -12,6 +12,7 @@ import {
     createRoles
 } from './libs/initialSetup'
 import {
+    createPublicDirectory,
     createImagesDirectory
 } from './libs/createImagesDirectory'
 
@@ -21,6 +22,8 @@ import * as routes from './routes'
 const app = express()
 
 createRoles()
+
+createPublicDirectory()
 createImagesDirectory()
 
 app.set('port', config.APP_PORT)
@@ -30,7 +33,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(helmet())
-app.use(express.static(path.join(__dirname, 'images')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/api/roles', routes.rolesRoutes)
 app.use('/api/users', routes.usersRoutes)
