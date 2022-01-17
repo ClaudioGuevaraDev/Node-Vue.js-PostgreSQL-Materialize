@@ -12,7 +12,7 @@
             </div>
             <div class="card-action">
                 <div class="buttons">
-                    <a class="waves-effect waves-light btn yellow darken-1"><i class="material-icons">edit</i></a>
+                    <router-link :to="{ name: 'update-review', params: { id: review.id } }" class="waves-effect waves-light btn yellow darken-1"><i class="material-icons">edit</i></router-link>
                     <a @click="handleDelete(review.id)" class="waves-effect waves-light btn red darken-1 modal-trigger"><i class="material-icons">delete</i></a>
                 </div>
             </div>
@@ -43,7 +43,7 @@ export default {
                     position: 'top'
                 })
             }
-        }
+        },
     }
 }
 </script>

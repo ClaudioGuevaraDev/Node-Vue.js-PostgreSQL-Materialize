@@ -35,6 +35,11 @@ const routes = [
         path: '/reviews',
         name: 'reviews',
         component: () => import('../views/ReviewList.vue')
+    },
+    {
+        path: '/update-review',
+        name: 'update-review',
+        component: () => import('../views/ReviewUpdateForm.vue')
     }
 ]
 

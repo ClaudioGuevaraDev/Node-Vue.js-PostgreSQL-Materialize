@@ -14,8 +14,20 @@ export const getAllReviews = async (userId) => {
     return data
 }
 
+export const getOneReview = async (reviewId) => {
+    const { data } = await axios.get(`${baseURL}/${reviewId}`)
+
+    return data
+}
+
 export const deleteReview = async (reviewId) => {
     const { data } = await axios.delete(`${baseURL}/${reviewId}`)
+
+    return data
+}
+
+export const updateReview = async (reviewId, review) => {
+    const { data } = await axios.put(`${baseURL}/${reviewId}`, review)
 
     return data
 }
