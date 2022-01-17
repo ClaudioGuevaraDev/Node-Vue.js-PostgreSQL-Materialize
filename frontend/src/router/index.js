@@ -25,6 +25,11 @@ const routes = [
         path: '/update-picture/:id',
         name: 'update-picture',
         component: () => import('../views/PictureDetailForm.vue')
+    },
+    {
+        path: '/reviews',
+        name: 'reviews',
+        component: () => import('../views/ReviewList.vue')
     }
 ]
 

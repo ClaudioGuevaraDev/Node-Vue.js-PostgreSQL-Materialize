@@ -20,7 +20,7 @@
                                     <router-link to="/">{{ $store.state.username }}</router-link>
                                 </li>
                                 <li v-show="$store.state.role === 'User'" class="active">
-                                    <router-link to="/">Mis Reseñas</router-link>
+                                    <router-link to="/reviews">Mis Reseñas</router-link>
                                 </li>
                                 <li>
                                     <a href="#modal-logout" class="waves-effect waves-light btn red darken-1 modal-trigger">
