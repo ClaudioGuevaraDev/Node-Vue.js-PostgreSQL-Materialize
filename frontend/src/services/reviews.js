@@ -13,3 +13,9 @@ export const getAllReviews = async (userId) => {
 
     return data
 }
+
+export const deleteReview = async (reviewId) => {
+    const { data } = await axios.delete(`${baseURL}/${reviewId}`)
+
+    return data
+}

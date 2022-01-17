@@ -13,7 +13,7 @@
             <div class="card-action">
                 <div class="buttons">
                     <a class="waves-effect waves-light btn yellow darken-1"><i class="material-icons">edit</i></a>
-                    <a class="waves-effect waves-light btn red darken-1 modal-trigger"><i class="material-icons">delete</i></a>
+                    <a @click="handleDelete(review.id)" class="waves-effect waves-light btn red darken-1 modal-trigger"><i class="material-icons">delete</i></a>
                 </div>
             </div>
         </div>
@@ -21,11 +21,28 @@
 </template>
 
 <script>
+import { deleteReview } from '../services/reviews.js'
+
 export default {
     props: {
         review: {
             type: Object,
             required: true
+        }
+    },
+    methods: {
+        async handleDelete(reviewId) {
+            try {
+                const res = await deleteReview(reviewId)
+                this.$store.state.reviews = this.$store.state.reviews.filter(review => review.id !== res.id)
+            } catch (error) {
+                this.$toast.open({
+                    type: 'error',
+                    duration: 5000,
+                    message: error.response.data.message,
+                    position: 'top'
+                })
+            }
         }
     }
 }
