@@ -40,6 +40,7 @@ app.use('/api/roles', routes.rolesRoutes)
 app.use('/api/users', routes.usersRoutes)
 app.use('/api/auth', routes.authRoutes)
 app.use('/api/pictures', routes.pictureRoutes)
+app.use('/api/reviews', routes.reviewRoutes)
 
 app.use(middlewares.errorHandler)
 app.use(middlewares.unknownEndpoint)
