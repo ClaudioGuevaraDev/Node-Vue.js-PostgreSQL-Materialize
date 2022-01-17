@@ -25,7 +25,6 @@ const app = express()
 createPublicDirectory()
 createImagesDirectory()
 
-createRoles()
 createPainterUsers()
 
 app.set('port', config.APP_PORT)

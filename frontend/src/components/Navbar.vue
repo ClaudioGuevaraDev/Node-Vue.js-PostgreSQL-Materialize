@@ -19,7 +19,7 @@
                                 <li>
                                     <router-link to="/">{{ $store.state.username }}</router-link>
                                 </li>
-                                <li class="active">
+                                <li v-show="$store.state.role === 'User'" class="active">
                                     <router-link to="/">Mis Reseñas</router-link>
                                 </li>
                                 <li>
