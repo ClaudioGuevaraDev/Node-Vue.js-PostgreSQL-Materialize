@@ -33,7 +33,7 @@ export default {
     methods: {
         async handleDelete(reviewId) {
             try {
-                const res = await deleteReview(reviewId)
+                const res = await deleteReview(reviewId, this.$store.state.token)
                 this.$store.state.reviews = this.$store.state.reviews.filter(review => review.id !== res.id)
             } catch (error) {
                 this.$toast.open({

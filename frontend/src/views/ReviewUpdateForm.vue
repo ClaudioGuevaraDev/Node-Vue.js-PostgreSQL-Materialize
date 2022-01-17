@@ -45,7 +45,7 @@ export default {
     methods: {
         async getReview() {
             try {
-                const res = await getOneReview(this.$route.params.id)
+                const res = await getOneReview(this.$route.params.id, this.$store.state.token)
                 this.comment = res[0].comment
             } catch (error) {
                 this.$toast.open({
@@ -62,7 +62,7 @@ export default {
                 const data = {
                     comment: this.comment
                 }
-                await updateReview(this.$route.params.id, data)
+                await updateReview(this.$route.params.id, data, this.$store.state.token)
                 this.$toast.open({
                     type: 'success',
                     duration: 5000,

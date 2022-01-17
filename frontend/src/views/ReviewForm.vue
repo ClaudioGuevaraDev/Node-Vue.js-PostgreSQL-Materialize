@@ -52,7 +52,7 @@ export default {
                     userId: this.$store.state.userId,
                     pictureId: this.$route.params.id
                 }
-                await createReview(data)
+                await createReview(data, this.$store.state.token)
                 this.$toast.open({
                     type: 'success',
                     duration: 5000,

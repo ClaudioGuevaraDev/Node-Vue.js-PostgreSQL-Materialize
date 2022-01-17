@@ -1,16 +1,32 @@
 import { Router } from 'express'
 
 import * as reviewsCtrl from '../controllers/reviews'
+import * as middlewares from '../middlewares'
 
 const router = Router()
 
-router.post('/', reviewsCtrl.createReview)
+router.post('/', [
+    middlewares.verifyToken,
+    middlewares.isUser
+], reviewsCtrl.createReview)
 
-router.get('/all/:id', reviewsCtrl.getAllReviews)
-router.get('/:id', reviewsCtrl.getOneReview)
+router.get('/all/:id', [
+    middlewares.verifyToken,
+    middlewares.isUser
+], reviewsCtrl.getAllReviews)
+router.get('/:id', [
+    middlewares.verifyToken,
+    middlewares.isUser
+], reviewsCtrl.getOneReview)
 
-router.delete('/:id', reviewsCtrl.deleteReview)
+router.delete('/:id', [
+    middlewares.verifyToken,
+    middlewares.isUser
+], reviewsCtrl.deleteReview)
 
-router.put('/:id', reviewsCtrl.updateReview)
+router.put('/:id', [
+    middlewares.verifyToken,
+    middlewares.isUser
+], reviewsCtrl.updateReview)
 
 export default router

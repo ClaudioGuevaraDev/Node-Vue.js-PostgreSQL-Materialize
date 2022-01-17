@@ -54,7 +54,7 @@ const store = createStore({
             }   
         },
         async mutationGetReviews(state) {
-            const res = await getAllReviews(state.userId)
+            const res = await getAllReviews(state.userId, state.token)
             state.reviews = res
         }
     },
