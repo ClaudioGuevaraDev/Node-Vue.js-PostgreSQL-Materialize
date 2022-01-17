@@ -6,6 +6,9 @@ import {
     getAllPictures,
     getFilteredPictures
 } from '../services/pictures'
+import {
+    getAllReviews
+} from '../services/reviews'
 
 const store = createStore({
     state: {
@@ -14,7 +17,8 @@ const store = createStore({
         userId: 0,
         username: '',
         role: '',
-        pictures: []
+        pictures: [],
+        reviews: []
     },
     mutations: {
         mutationVerificationSession(state) {
@@ -48,6 +52,10 @@ const store = createStore({
                 const res = await getFilteredPictures(state.userId, state.token)
                 state.pictures = res
             }   
+        },
+        async mutationGetReviews(state) {
+            const res = await getAllReviews(state.userId)
+            state.reviews = res
         }
     },
     actions: {
@@ -59,6 +67,9 @@ const store = createStore({
         },
         actionGetPictures(context) {
             context.commit('mutationGetPictures')
+        },
+        actionGetReviews(context) {
+            context.commit('mutationGetReviews')
         }
     }
 })

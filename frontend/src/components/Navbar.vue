@@ -78,7 +78,7 @@
                 <p>¿Estas seguro de cerrar tu sesión?</p>
             </div>
             <div class="modal-footer">
-                <a @click="$store.dispatch('actionLogout')" class="modal-close waves-effect waves-green btn-flat">Confirmar</a>
+                <a @click="logout" class="modal-close waves-effect waves-green btn-flat">Confirmar</a>
                 <a class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
             </div>
         </div>
@@ -88,6 +88,12 @@
 <script>
 export default {
     name: 'Navbar',
+    methods: {
+        logout() {
+            this.$store.dispatch('actionLogout')
+            this.$router.push('/')
+        }
+    },
     mounted() {
         M.AutoInit();
     }

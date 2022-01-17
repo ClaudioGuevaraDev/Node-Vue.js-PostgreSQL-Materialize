@@ -3,11 +3,11 @@
         <div class="card blue-grey darken-1 small">
             <div class="card-content white-text">
                 <div class="header">
-                    <span class="card-title">Título de la pintura</span>
-                    <span class="date">17-01-2022</span>
+                    <span class="card-title">{{ review.title }}</span>
+                    <span class="date">{{ review.updatedat.split('T')[0] }}</span>
                 </div>
                 <p class="paragraph">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. At magni molestias quibusdam adipisci aliquid, temporibus nisi. Quos optio culpa fugiat doloremque provident, alias, sunt fugit dolore eaque, quia hic nemo.
+                    {{ review.comment }}
                 </p>
             </div>
             <div class="card-action">
@@ -19,6 +19,17 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    props: {
+        review: {
+            type: Object,
+            required: true
+        }
+    }
+}
+</script>
 
 <style scoped>
 

@@ -14,24 +14,14 @@
                 <div class="card-action">
                     <div v-if="$store.state.role === 'User'">
                         <div class="buttons">
-                            <a class="waves-effect waves-light btn light-blue darken-1"><i class="material-icons">insert_comment</i></a>
+                            <router-link :to="{ name: 'add-review', params: { id: picture.id } }" class="waves-effect waves-light btn light-blue darken-1"><i class="material-icons">insert_comment</i></router-link>
                         </div>
                     </div>
                     <div v-else-if="$store.state.role === 'Painter'">
                         <div class="buttons">
                             <router-link :to="{ name: 'update-picture', params: { id: picture.id }}" class="waves-effect waves-light btn yellow darken-1"><i class="material-icons">edit</i></router-link>
-                            <a href="#modal-delete" class="waves-effect waves-light btn red darken-1 modal-trigger"><i class="material-icons">delete</i></a>
+                            <a @click="handleDeletePicture(picture.id)" class="waves-effect waves-light btn red darken-1"><i class="material-icons">delete</i></a>
                         </div>
-                    </div>
-                </div>
-                <div class="modal" id="modal-delete">
-                    <div class="modal-content">
-                        <h5>Eliminar Pintura</h5>
-                        <p>¿Estas seguro de eliminar la pintura '{{ picture.title }}'?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a @click="handleDeletePicture(picture.id)" class="modal-close waves-effect waves-green btn-flat">Confirmar</a>
-                        <a class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
                     </div>
                 </div>
             </div>            
@@ -47,7 +37,7 @@ export default {
         picture: {
             type: Object,
             required: true
-        }
+        },
     },
     methods: {
         getImageUrl(image) {
