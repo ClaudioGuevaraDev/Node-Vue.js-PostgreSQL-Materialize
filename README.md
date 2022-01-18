@@ -25,7 +25,7 @@ La aplicación cuenta con rutas protegidas y con sistema de autenticación y aut
 
 ### Instalación
 
-- Crear una base de datos *node_vue_materialize* y cargar el archivo *database/db.sql* en la base de datos.
+- Crear una base de datos *node_vue_materialize* y cargar el archivo *scripts/db.sql* en la base de datos.
 - Tanto para la carpeta client y server hacer *npm install*
 
 ### Ejecución
